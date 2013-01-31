@@ -2,22 +2,10 @@ var app = {
 
     initialize: function() {
         var self = this;
-        // compile templates
-        this.homeTpl = Handlebars.compile($("#home-tpl").html());
-        this.employeeLiTpl = Handlebars.compile($("#employee-li-tpl").html());
         //init storage
         this.store = new LocalStorageStore(function() {
-            self.renderHomeView();
+            $('body').html(new HomeView(self.store).render().el);
             self.showAlert("Store initialized", "Info");
-        });
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
-    },
-
-    findByName: function() {
-        console.log('findByName');
-        var self = this;
-        this.store.findByName($('.search-key').val(), function(employees) {
-            $('.employee-list').html(self.employeeLiTpl(employees));
         });
     },
 
@@ -27,11 +15,6 @@ var app = {
         } else {
             alert(title ? (title + ": " + message) : message);
         }
-    },
-
-    renderHomeView: function() {
-        $('body').html(this.homeTpl());
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
     }
 };
 
