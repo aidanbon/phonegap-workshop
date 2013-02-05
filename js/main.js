@@ -78,6 +78,7 @@ var app = {
         var self = this,
             hash = window.location.hash;
 
+this.showAlert("debug", "in route");
         if (!hash) {
             if (this.homePage) {
                 this.slidePage(this.homePage);
