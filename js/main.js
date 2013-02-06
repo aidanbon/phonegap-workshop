@@ -62,24 +62,24 @@ var app = {
             currentPageDest = "stage-left";
         }
 
+        this.showAlert("5", page.el);
         $('body').append(page.el);
 
         // Wait until the new page has been added to the DOM...
         setTimeout(function() {
+            self.showAlert("6", "currentPageDest");
             // Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
             $(self.currentPage.el).attr('class', 'page transition ' + currentPageDest);
             // Slide in the new page
             $(page.el).attr('class', 'page stage-center transition');
             self.currentPage = page;
-        });
+        }, 100);
     },
 
     route: function() {
         var self = this,
             hash = window.location.hash;
 
-this.showAlert("1", "in route location="+ window.location);
-this.showAlert("2", "in route hash =" + hash);
         if (!hash) {
             if (this.homePage) {
                 this.slidePage(this.homePage);
@@ -91,7 +91,6 @@ this.showAlert("2", "in route hash =" + hash);
         }
         var match = hash.match(app.detailsURL);
         if (match) {
-            this.showAlert("3: match-1", match[1]);
             this.store.findById(Number(match[1]), function(employee) {
                 self.showAlert("4: employee", JSON.stringify(employee));
                 self.slidePage(new EmployeeView(employee).render());
