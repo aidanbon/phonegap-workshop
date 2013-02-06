@@ -78,7 +78,8 @@ var app = {
         var self = this,
             hash = window.location.hash;
 
-this.showAlert("debug", "in route");
+this.showAlert("debug1", "in route location="+ window.location);
+this.showAlert("debug2", "in route hash =" + hash);
         if (!hash) {
             if (this.homePage) {
                 this.slidePage(this.homePage);
@@ -96,7 +97,7 @@ this.showAlert("debug", "in route");
         }
     },
 
-    showAlert: function (message, title) {
+    showAlert: function (title, message) {
         if (navigator.notification) {
           navigator.notification.alert(message, null, title, 'OK');
         } else {
