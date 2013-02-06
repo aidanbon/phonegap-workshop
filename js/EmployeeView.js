@@ -3,11 +3,13 @@
 var EmployeeView = function(employee) {
  
     this.initialize = function() {
+        alert("in EmployeeView initialize");
         this.el = $('<div/>');
     };
  
     this.render = function() {
         this.el.html(EmployeeView.template(employee));
+        alert("render employee html "+this.el.html);
         return this;
     };
 
