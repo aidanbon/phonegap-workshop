@@ -78,8 +78,8 @@ var app = {
         var self = this,
             hash = window.location.hash;
 
-this.showAlert("debug1", "in route location="+ window.location);
-this.showAlert("debug2", "in route hash =" + hash);
+this.showAlert("1", "in route location="+ window.location);
+this.showAlert("2", "in route hash =" + hash);
         if (!hash) {
             if (this.homePage) {
                 this.slidePage(this.homePage);
@@ -91,7 +91,9 @@ this.showAlert("debug2", "in route hash =" + hash);
         }
         var match = hash.match(app.detailsURL);
         if (match) {
+            this.showAlert("3: match-1", match[1]);
             this.store.findById(Number(match[1]), function(employee) {
+                self.showAlert("4: employee", JSON.stringify(employee));
                 self.slidePage(new EmployeeView(employee).render());
             });
         }
