@@ -41,7 +41,6 @@ var app = {
         var currentPageDest,
             self = this;
 
-        this.showAlert("4.5 currentPage", this.currentPage);
         // If there is no current page (app just started) -> No transition: Position new page in the view port
         if (!this.currentPage) {
             $(page.el).attr('class', 'page stage-center');
@@ -63,18 +62,16 @@ var app = {
             currentPageDest = "stage-left";
         }
 
-        this.showAlert("5", page.el);
         $('body').append(page.el);
 
         // Wait until the new page has been added to the DOM...
         setTimeout(function() {
-            self.showAlert("6", currentPageDest);
             // Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
             $(self.currentPage.el).attr('class', 'page transition ' + currentPageDest);
             // Slide in the new page
             $(page.el).attr('class', 'page stage-center transition');
             self.currentPage = page;
-        }, 100);
+        });
     },
 
     route: function() {
@@ -93,8 +90,10 @@ var app = {
         var match = hash.match(app.detailsURL);
         if (match) {
             this.store.findById(Number(match[1]), function(employee) {
-                self.showAlert("4: employee", JSON.stringify(employee));
-                self.slidePage(new EmployeeView(employee).render());
+                var ev = new EmployeeView(employee);
+                var evrender = ev.render();
+                self.slidePage(evrender);
+                //self.slidePage(new EmployeeView(employee).render());
             });
         }
     },
