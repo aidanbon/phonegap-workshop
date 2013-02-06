@@ -41,6 +41,7 @@ var app = {
         var currentPageDest,
             self = this;
 
+        this.showAlert("4.5 currentPage", this.currentPage);
         // If there is no current page (app just started) -> No transition: Position new page in the view port
         if (!this.currentPage) {
             $(page.el).attr('class', 'page stage-center');
@@ -67,7 +68,7 @@ var app = {
 
         // Wait until the new page has been added to the DOM...
         setTimeout(function() {
-            self.showAlert("6", "currentPageDest");
+            self.showAlert("6", currentPageDest);
             // Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
             $(self.currentPage.el).attr('class', 'page transition ' + currentPageDest);
             // Slide in the new page
